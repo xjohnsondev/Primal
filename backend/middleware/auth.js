@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { SECRET_KEY } = requre("../config");
+const { SECRET_KEY } = require("../config");
 const { UnauthorizedError } = require("../expressError");
 
 
