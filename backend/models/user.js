@@ -116,9 +116,9 @@ class User {
    * all the fields; this only changes provided ones.
    *
    * Data can include:
-   *   { firstName, lastName, password, email, favorites, isAdmin}
+   *   { first_name, last_name, password, email, favorites, is_admin}
    *
-   * Returns { username, firstName, lastName, email, favorites, isAdmin }
+   * Returns { username, first_name, last_name, password, email, favorites, is_admin }
    *
    * Throws NotFoundError if not found.
    *
@@ -141,10 +141,10 @@ class User {
                       SET ${setCols} 
                       WHERE username = ${usernameVarIdx} 
                       RETURNING username,
-                                first_name AS "firstName",
-                                last_name AS "lastName",
+                                first_name,
+                                last_name,
                                 email,
-                                is_admin AS "isAdmin"`;
+                                is_admin`;
     const result = await db.query(querySql, [...values, username]);
     const user = result.rows[0];
 
@@ -166,6 +166,88 @@ class User {
     const user = result.rows[0];
 
     if (!user) throw new NotFoundError(`No user: ${username}`);
+  }
+
+  /** Add an exercise to user's favorites.
+   *
+   * Returns { first_name, last_name, password, email, favorites, is_admin }
+   *
+   * Throws NotFoundError if user not found.
+   **/
+  static async addToFavorites(username, exerciseId) {
+    // Check if user exists
+    const userRes = await db.query(
+      `SELECT username
+       FROM users
+       WHERE username = $1`,
+      [username]
+    );
+    const user = userRes.rows[0];
+
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    // Check if exercise exists
+    const exerciseRes = await db.query(
+      `SELECT id
+       FROM exercises
+       WHERE id = $1`,
+      [exerciseId]
+    );
+    const exercise = exerciseRes.rows[0];
+
+    if (!exercise) throw new NotFoundError(`No exercise with ID: ${exerciseId}`);
+
+    // Add exercise to favorites
+    await db.query(
+      `INSERT INTO user_favorites (user_id, exercise_id)
+       VALUES ((SELECT id FROM users WHERE username = $1), $2)`,
+      [username, exerciseId]
+    );
+
+    return await this.get(username);
+  }
+
+  /** Remove an exercise from user's favorites.
+   *
+   * Returns { first_name, last_name, password, email, favorites, is_admin }
+   *
+   * Throws NotFoundError if user not found or exercise not in favorites.
+   **/
+  static async removeFromFavorites(username, exerciseId) {
+    // Check if user exists
+    const userRes = await db.query(
+      `SELECT username
+       FROM users
+       WHERE username = $1`,
+      [username]
+    );
+    const user = userRes.rows[0];
+
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    // Check if exercise exists in user's favorites
+    const favoriteRes = await db.query(
+      `SELECT user_id, exercise_id
+       FROM user_favorites
+       WHERE user_id = (SELECT id FROM users WHERE username = $1) AND exercise_id = $2`,
+      [username, exerciseId]
+    );
+    const favorite = favoriteRes.rows[0];
+
+    if (!favorite) {
+      throw new NotFoundError(
+        `Exercise with ID ${exerciseId} not found in ${username}'s favorites.`
+      );
+    }
+
+    // Remove exercise from favorites
+    await db.query(
+      `DELETE FROM user_favorites
+       WHERE user_id = (SELECT id FROM users WHERE username = $1) AND exercise_id = $2`,
+      [username, exerciseId]
+    );
+
+    return await this.get(username);
   }
 }
 

@@ -5,15 +5,20 @@ CREATE TABLE users (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    favorites VARCHAR[]
     is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE exercises (
     id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
+    name VARCHAR(100) NOT NULL,
     target TEXT NOT NULL,
     secondary TEXT[],
-    gif TEXT
+    gif TEXT,
     instructions TEXT[]
+);
+
+CREATE TABLE user_favorites (
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    exercise_id INT REFERENCES exercises(id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, exercise_id)
 );
