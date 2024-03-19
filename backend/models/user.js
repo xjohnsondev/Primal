@@ -110,6 +110,24 @@ class User {
     return user;
   }
 
+  /** return data about all users.
+   *
+   * Returns { username, first_name, last_name, email, favorites }
+   *
+   **/
+  static async getAll(){
+    const results = await db.query(
+      `SELECT username,
+                first_name,
+                last_name,
+                email,
+                favorites
+        FROM users
+        ORDER BY username`
+    );
+    return results.rows;
+  }  
+
   /** Update user data with `data`.
    *
    * This is a "partial update" --- it's fine if data doesn't contain

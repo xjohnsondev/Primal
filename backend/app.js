@@ -6,7 +6,7 @@ const { NotFoundError } = require("./expressError");
 // const { authenticateJWT } = require("./middleware/auth");
 
 // const authRoutes = require("./routes/auth");
-const usersRoutes = require("./routes/users");
+const usersRoutes = require("./routes/users").default;
 
 const morgan = require("morgan");
 
