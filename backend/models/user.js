@@ -120,8 +120,7 @@ class User {
       `SELECT username,
                 first_name,
                 last_name,
-                email,
-                favorites
+                email
         FROM users
         ORDER BY username`
     );

@@ -1,4 +1,4 @@
-import User from "../models/user";
+const User = require("../models/user");
 
 const jsonschema = require("jsonschema");
 
@@ -89,3 +89,5 @@ router.delete("/:username", ensureCorrectUserOrAdmin, async function (req, res, 
       return next(err);
     }
   });
+
+module.exports = router;
