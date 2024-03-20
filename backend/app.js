@@ -7,6 +7,7 @@ const { authenticateJWT } = require("./middleware/auth");
 
 const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
+const exercisesRoutes = require("./routes/exercises");
 
 const morgan = require("morgan");
 
@@ -19,6 +20,7 @@ app.use(authenticateJWT);
 
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
+app.use("/exercise", exercisesRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to your Primal application" });
