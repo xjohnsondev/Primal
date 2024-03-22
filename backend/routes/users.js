@@ -53,6 +53,20 @@ router.get("/", ensureAdmin, async function(req, res, next){
     }
 })
 
+/** GET / => { user: {username, first_name, last_name, email, favorites } }
+ *
+ * Returns selected user.
+ *
+ **/
+router.get("/:username", ensureCorrectUserOrAdmin, async function(req, res, next){
+  try {
+    const user = await User.get(req.params.username);
+    return res.json({ user })
+  } catch(e){
+    return next(e);
+  }
+})
+
 /** PATCH /[username] { user } => { user }
  *
  * Data can include:

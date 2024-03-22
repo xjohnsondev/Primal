@@ -8,7 +8,7 @@ class Exercise {
    * Returns { name, target, secondary[], gif, instructions[] }
    *
    **/
-  static async get(name) {
+  static async get(id) {
     const result = await db.query(
       `SELECT name,
                   target,
@@ -16,11 +16,11 @@ class Exercise {
                   gif,
                   instructions
            FROM exercises
-           WHERE name = $1`,
-      [name]
+           WHERE id = $1`,
+      [id]
     );
     const exercise = result.rows[0];
-    if (!exercise) throw new NotFoundError(`No exercise: ${name}`);
+    if (!exercise) throw new NotFoundError(`No exercise with id: ${id}`);
     return exercise;
   }
 
@@ -78,8 +78,8 @@ class Exercise {
           [
             exercise.name,
             exercise.target,
-            exercise.secondary,
-            exercise.gif,
+            exercise.secondaryMuscles,
+            exercise.gifUrl,
             exercise.instructions,
           ]
         );
