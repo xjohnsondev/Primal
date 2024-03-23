@@ -44,7 +44,7 @@ router.post("/", ensureAdmin, async function (req, res, next) {
  *
  * Authorization required: admin
  **/
-router.get("/", ensureAdmin, async function(req, res, next){
+router.get("/", async function(req, res, next){
     try{
         const users = await User.getAll();
         return res.json({ users })

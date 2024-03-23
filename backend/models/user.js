@@ -21,10 +21,9 @@ class User {
     const result = await db.query(
       `SELECT username,
                 password,
-                first_name
-                last_name
+                first_name,
+                last_name,
                 email,
-                favorites,
                 is_admin
         FROM users
         WHERE username = $1`,
@@ -53,13 +52,12 @@ class User {
     password,
     first_name,
     last_name,
-    email,
-    is_admin,
+    email
   }) {
     const duplicateCheck = await db.query(
       `SELECT username
         FROM users
-        WHERER username = $1`,
+        WHERE username = $1`,
       [username]
     );
     if (duplicateCheck.rows[0]) {
@@ -73,11 +71,10 @@ class User {
               password,
               first_name,
               last_name,
-              email,
-              is_admin)
-             VALUES ($1, $2, $3, $4, $5, $6)
-             RETURNING username, first_name last_name, email, is_admin`,
-      [username, hashedPassword, first_name, last_name, email, is_admin]
+              email)
+             VALUES ($1, $2, $3, $4, $5)
+             RETURNING username, first_name, last_name, email`,
+      [username, hashedPassword, first_name, last_name, email]
     );
     const user = result.rows[0];
 
@@ -146,11 +143,11 @@ class User {
     }
 
     const { setCols, values } = sqlForPartialUpdate(data, {
-      firstName: "first_name",
-      lastName: "last_name",
+      first_name: "first_name",
+      last_name: "last_name",
       email: "email",
       favorites: "favorites",
-      isAdmin: "is_admin",
+      is_admin: "is_admin",
     });
     const usernameVarIdx = "$" + (values.length + 1);
 

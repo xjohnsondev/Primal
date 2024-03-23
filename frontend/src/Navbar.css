@@ -1,26 +1,40 @@
 .nav {
     display: flex;
-    justify-content: space-between; /* Aligns items with space between them */
+    align-items: center; /* Align items vertically */
+    font-weight: 600;
 }
 
 .nav-brand p {
     color: #66FCF1;
     font-family: 'Lexend Deca', sans-serif;
     font-size: 2.5rem;
-    font-weight: 600;
-    text-decoration: none;
-    margin-left: 5%; /* Remove default margin */
-    margin-top: 0%;
+    margin: 0 0 0 5%;
 }
-  
+
+.link:hover {
+    text-decoration: none !important;
+}
+
 .nav-login p {
     color: #66FCF1;
     font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    margin-right: 20px; /* Remove default margin */
+    margin-right: 20px;
 }
 
+.nav-link {
+    margin-left: 75%;
+    display: flex;
+}
+
+.nav-link p{
+    color: #66FCF1;
+}
+
+.nav-exercises,
+.nav-favorites,
+.nav-logout {
+    margin-right: 30%;
+}
 
 /* Imported fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap');

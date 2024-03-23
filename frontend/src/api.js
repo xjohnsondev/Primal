@@ -42,6 +42,25 @@ class PrimalApi {
     let res = await this.request(`auth/register`, data, "post");
     return res.token;
   }
+
+  /** Get all exercises. */
+  static async getAll(){
+    let res = await this.request(`exercises/all`);
+    return res.exercises;
+  }
+
+  /** Get all exercise targets */
+  static async getTargets(){
+    let res = await this.request(`exercises`);
+    return res
+  }
+
+  /** Get all exercises for a target */
+  static async getTargetExercises(target){
+    let res = await this.request(`exercises/target/${target}`);
+    return res;
+  }
+
 }
 
 export default PrimalApi;

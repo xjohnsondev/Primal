@@ -13,7 +13,7 @@ const router = express.Router();
  * Returns all exercises
  *
  **/
-router.get("/", async function(req, res, next){
+router.get("/all", async function(req, res, next){
     try{
         const exercises = await Exercise.getAll();
         return res.status(201).json({exercises});
@@ -33,6 +33,34 @@ router.get("/:exercise", async function(req, res, next){
         return res.json({exercise})
     } catch(e){
         return next(e)
+    }
+})
+
+/** GET / { target }  => { exercises }
+ *
+ * Returns all exercises for a target
+ **/
+router.get("/target/:target", async function(req, res, next){
+    try{
+        console.log(req.params.target);
+        const target = await Exercise.getTargetExercises(req.params.target);
+        return res.json({target});
+    } catch(e){
+        return next(e);
+    }
+})
+
+/** GET / { targets }  => { target }
+ *
+ * Returns all targets
+ *
+ **/
+router.get("/", async function(req, res, next){
+    try{
+        const targets = await Exercise.getTargets();
+        return res.json({targets});
+    }catch(e){
+        return next(e);
     }
 })
 

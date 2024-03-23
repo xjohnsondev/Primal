@@ -16,9 +16,9 @@ function App() {
         try {
           let username = jwtDecode(token);
           PrimalApi.token = token
-          let currentUser = PrimalApi.getCurrentUser(username);
+          let currentUser = await PrimalApi.getCurrentUser(username.username);
           setCurrentUser(currentUser);
-          console.log(currentUser);          
+          console.log("current user: ", currentUser);          
         } catch (e) {
           console.log(e);
           console.log("---");
@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-        <RoutesList />
+        <RoutesList login={login} signup={signup} logout={logout} />
       </UserContext.Provider>
     </div>
   );

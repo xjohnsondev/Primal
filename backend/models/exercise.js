@@ -43,7 +43,45 @@ class Exercise {
     return result.rows;
   }
 
-  /** Refreshes exercise table.
+  /** Returns all targets.
+   *
+   * Returns { targets }
+   *
+   * Throws BadRequestError if exercise not found.
+   **/
+  static async getTargets() {
+    const result = await db.query(
+      `SELECT DISTINCT target 
+      FROM exercises
+      ORDER BY target`
+    );
+    if (!result.rows) throw new BadRequestError("Can't retrieve targets");
+    return result.rows;
+  }
+
+  /** Returns all exercises for target.
+   *
+   * Returns target => [{id, name, target, secondary, gif, instructions}, ...}]
+   *
+   * Throws BadRequestError if exercise not found.
+   **/
+  static async getTargetExercises(target) {
+    const result = await db.query(
+      `SELECT id,
+      name,
+      target,
+      secondary,
+      gif,
+      instructions
+      FROM exercises
+      WHERE target = $1`,
+      [target]
+    );
+    if (!result.rows) throw new BadRequestError("Can't retrieve exercises");
+    return result.rows;
+  }
+
+  /** Refreshes exercise table (MAKES AN API CALL).
    *
    * Returns [{ name, target, secondary[], gif, instructions[], ...}]
    *
@@ -52,24 +90,25 @@ class Exercise {
   static async refreshData() {
     try {
       const options = {
-        method: 'GET',
-        url: 'https://exercisedb.p.rapidapi.com/exercises',
-        params: {limit: '2000'},
+        method: "GET",
+        url: "https://exercisedb.p.rapidapi.com/exercises",
+        params: { limit: "2000" },
         headers: {
-          'X-RapidAPI-Key': 'f5c918036amsh37ee9beb63bb742p1a96eejsn9fa4915133d9',
-          'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
-        }
+          "X-RapidAPI-Key":
+            "f5c918036amsh37ee9beb63bb742p1a96eejsn9fa4915133d9",
+          "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+        },
       };
       const response = await axios.request(options);
 
       const exercises = response.data;
-      
+
       // Log the received data from the external API
-      console.log('Received data:', exercises);
-      
+      console.log("Received data:", exercises);
+
       // Truncate the exercises table
       await db.query("DELETE FROM exercises");
-  
+
       // Insert exercises into the table
       for (const exercise of exercises) {
         await db.query(
@@ -86,11 +125,10 @@ class Exercise {
       }
       return exercises;
     } catch (e) {
-      console.error('Error refreshing exercise table:', e);
+      console.error("Error refreshing exercise table:", e);
       throw new BadRequestError("Can't refresh exercise table: " + e.message);
     }
   }
-  
 }
 
 module.exports = Exercise;
