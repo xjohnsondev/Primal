@@ -51,8 +51,7 @@ function App() {
     }
   }
 
-  /** Handles site-wide login.
-   */
+  /** Handles site-wide login.*/
   async function login(loginData) {
     try {
       let token = await PrimalApi.login(loginData);
@@ -68,10 +67,20 @@ function App() {
     }
   }
 
+  /** Refreshes data (Mainly for gif url) */
+  // async function refresh(){
+  //   try{
+  //     let response = await PrimalApi.refreshData();
+  //     return {success: true, data: response};
+  //   } catch (e){
+  //     console.error("Error refreshing data", e);
+  //   }
+  // }
+
   return (
     <div className="App">
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-        <RoutesList login={login} signup={signup} logout={logout} />
+        <RoutesList login={login} signup={signup} logout={logout}/>
       </UserContext.Provider>
     </div>
   );

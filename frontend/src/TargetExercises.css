@@ -1,0 +1,35 @@
+
+
+.tar-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ex-card {
+  height: 260px;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  border: 1px solid #45A29E;
+}
+
+.card-gif {
+  height: 220px;
+  width: 210px;
+}
+
+.card-text {
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    color: #66FCF1 !important;
+    font-weight: 600;
+  }
+
+  .blur-background {
+    backdrop-filter: blur(5px); /* Adjust the blur intensity as needed */
+  }

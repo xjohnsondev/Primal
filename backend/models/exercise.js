@@ -3,7 +3,7 @@ const { NotFoundError, BadRequestError } = require("../expressError");
 const axios = require("axios");
 
 class Exercise {
-  /** Given a exercise name, return data about exercise.
+  /** Given a exercise id, return data about exercise.
    *
    * Returns { name, target, secondary[], gif, instructions[] }
    *

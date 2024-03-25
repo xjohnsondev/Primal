@@ -14,6 +14,7 @@ const RoutesList = ({login, signup, logout}) => {
                 <Route exact path="/login-signup" element={<LoginSignup login={login} signup={signup}/>} />
                 <Route exact path="/exercises" element={<ExerciseCats />} />
                 <Route exact path="/exercises/target/:target" element={<TargetExercises />} />
+                {/* <Route exact path="/exercises/refresh" element={<Home refresh={refresh}/>} /> */}
             </Routes>
         </BrowserRouter>
     );
