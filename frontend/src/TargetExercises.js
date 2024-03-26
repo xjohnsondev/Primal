@@ -7,7 +7,6 @@ import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import IconButton from "@mui/joy/IconButton";
 import Link from "@mui/joy/Link";
-// import Favorite from '@mui/icons-material/Favorite';
 
 import ExpandedCard from "./ExpandedCard";
 import PrimalApi from "./api";
@@ -34,16 +33,18 @@ const TargetExercises = () => {
 
   function showcaseCard(data) {
     setExpanded(data);
+    // console.log(data);
   }
+  
 
   return (
     <>
       <h1 style={{ textTransform: "capitalize" }}>{target}</h1>
-      <div className={`tar-list`}>
+      <div className="tar-list">
         {exercises.map((exercise) => (
           <div key={uuidv4()}>
             <Card
-              className="ex-card"
+              className="ex-card small-card"
               variant="plain"
               onClick={() => showcaseCard(exercise)}
             >
@@ -63,7 +64,8 @@ const TargetExercises = () => {
           </div>
         ))}
       </div>
-      {expanded && <ExpandedCard data={expanded} />}
+      {expanded && <ExpandedCard data={expanded} setExpanded={setExpanded}/>}
+
     </>
   );
 };

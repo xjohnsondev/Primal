@@ -1,5 +1,4 @@
 
-
 .tar-list {
   display: flex;
   justify-content: center;
@@ -15,6 +14,10 @@
   border: 1px solid #45A29E;
 }
 
+.small-card:hover {
+    cursor: pointer;
+}
+
 .card-gif {
   height: 220px;
   width: 210px;
@@ -28,8 +31,4 @@
     max-width: 90%;
     color: #66FCF1 !important;
     font-weight: 600;
-  }
-
-  .blur-background {
-    backdrop-filter: blur(5px); /* Adjust the blur intensity as needed */
   }
