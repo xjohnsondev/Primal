@@ -129,6 +129,65 @@ class Exercise {
       throw new BadRequestError("Can't refresh exercise table: " + e.message);
     }
   }
+
+  /** Add or removes an exercise to favorites table.
+   *
+   * Returns { username, favorites[] }
+   *
+   * Throws NotFoundError if user not found.
+   **/
+  static async handleFavorite(userId, exerciseId) {
+    // Check if user exists
+    const userRes = await db.query(
+      `SELECT id,
+              username
+         FROM users
+         WHERE id = $1`,
+      [userId]
+    );
+    const user = userRes.rows[0];
+
+    if (!user) throw new NotFoundError(`No user with id: ${userId}`);
+
+    // Check if exercise exists
+    const exerciseRes = await db.query(
+      `SELECT id
+         FROM exercises
+         WHERE id = $1`,
+      [exerciseId]
+    );
+    const exercise = exerciseRes.rows[0];
+
+    if (!exercise)
+      throw new NotFoundError(`No exercise with ID: ${exerciseId}`);
+
+    // Check if the exercise is already in the favorites
+    const favoriteRes = await db.query(
+      `SELECT user_id
+   FROM user_favorites
+   WHERE user_id = $1 AND exercise_id = $2`,
+      [userId, exerciseId]
+    );
+    const isFavorite = favoriteRes.rows.length > 0;
+
+    if (isFavorite) {
+      // Remove exercise from favorites
+      await db.query(
+        `DELETE FROM user_favorites
+     WHERE user_id = $1 AND exercise_id = $2`,
+        [userId, exerciseId]
+      );
+    } else {
+      // Add exercise to favorites
+      await db.query(
+        `INSERT INTO user_favorites (user_id, exercise_id)
+         VALUES ($1, $2)`,
+        [userId, exerciseId]
+      );
+    }
+    return await this.get(exerciseId);
+  }
+  
 }
 
 module.exports = Exercise;

@@ -47,13 +47,7 @@ class User {
    *
    * Throws BadRequestError on duplicates.
    **/
-  static async register({
-    username,
-    password,
-    first_name,
-    last_name,
-    email
-  }) {
+  static async register({ username, password, first_name, last_name, email }) {
     const duplicateCheck = await db.query(
       `SELECT username
         FROM users
@@ -90,11 +84,12 @@ class User {
 
   static async get(username) {
     const userRes = await db.query(
-      `SELECT username,
-                  first_name,
-                  last_name,
-                  email,
-                  is_admin
+      `SELECT id,
+              username,
+              first_name,
+              last_name,
+              email,
+              is_admin
            FROM users
            WHERE username = $1`,
       [username]
@@ -112,7 +107,7 @@ class User {
    * Returns { username, first_name, last_name, email, favorites }
    *
    **/
-  static async getAll(){
+  static async getAll() {
     const results = await db.query(
       `SELECT username,
                 first_name,
@@ -122,7 +117,7 @@ class User {
         ORDER BY username`
     );
     return results.rows;
-  }  
+  }
 
   /** Update user data with `data`.
    *
@@ -182,88 +177,7 @@ class User {
     if (!user) throw new NotFoundError(`No user: ${username}`);
   }
 
-  /** Add an exercise to user's favorites.
-   *
-   * Returns { first_name, last_name, password, email, favorites, is_admin }
-   *
-   * Throws NotFoundError if user not found.
-   **/
-  static async addToFavorites(username, exerciseId) {
-    // Check if user exists
-    const userRes = await db.query(
-      `SELECT username
-       FROM users
-       WHERE username = $1`,
-      [username]
-    );
-    const user = userRes.rows[0];
 
-    if (!user) throw new NotFoundError(`No user: ${username}`);
-
-    // Check if exercise exists
-    const exerciseRes = await db.query(
-      `SELECT id
-       FROM exercises
-       WHERE id = $1`,
-      [exerciseId]
-    );
-    const exercise = exerciseRes.rows[0];
-
-    if (!exercise) throw new NotFoundError(`No exercise with ID: ${exerciseId}`);
-
-    // Add exercise to favorites
-    await db.query(
-      `INSERT INTO user_favorites (user_id, exercise_id)
-       VALUES ((SELECT id FROM users WHERE username = $1), $2)`,
-      [username, exerciseId]
-    );
-
-    return await this.get(username);
-  }
-
-  /** Remove an exercise from user's favorites.
-   *
-   * Returns { first_name, last_name, password, email, favorites, is_admin }
-   *
-   * Throws NotFoundError if user not found or exercise not in favorites.
-   **/
-  static async removeFromFavorites(username, exerciseId) {
-    // Check if user exists
-    const userRes = await db.query(
-      `SELECT username
-       FROM users
-       WHERE username = $1`,
-      [username]
-    );
-    const user = userRes.rows[0];
-
-    if (!user) throw new NotFoundError(`No user: ${username}`);
-
-    // Check if exercise exists in user's favorites
-    const favoriteRes = await db.query(
-      `SELECT user_id, exercise_id
-       FROM user_favorites
-       WHERE user_id = (SELECT id FROM users WHERE username = $1) AND exercise_id = $2`,
-      [username, exerciseId]
-    );
-    const favorite = favoriteRes.rows[0];
-
-    if (!favorite) {
-      throw new NotFoundError(
-        `Exercise with ID ${exerciseId} not found in ${username}'s favorites.`
-      );
-    }
-
-    // Remove exercise from favorites
-    await db.query(
-      `DELETE FROM user_favorites
-       WHERE user_id = (SELECT id FROM users WHERE username = $1) AND exercise_id = $2`,
-      [username, exerciseId]
-    );
-
-    return await this.get(username);
-  }
 }
 
 module.exports = User;
-

@@ -10,9 +10,14 @@ import { v4 as uuidv4 } from "uuid";
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIconFill from '@mui/icons-material/Favorite';
+import PrimalApi from "./api";
+import {useContext } from "react";
+import UserContext from "./UserContext";
 
 const ExpandedCard = ({ data, setExpanded }) => {
+    const user = useContext(UserContext);
   console.log(data);
+  console.log(user.currentUser);
   //   const data = {
   //     id: 2649,
   //     gif: "https://v2.exercisedb.io/image/qC3lqBkzUjNPWM",
@@ -31,6 +36,12 @@ const ExpandedCard = ({ data, setExpanded }) => {
   function closeCard(){
     setExpanded();
   }
+
+  async function handleFavorite(exercise){
+    console.log(exercise);
+    const response = await PrimalApi.handleFavorite(user.currentUser.id, exercise.id); 
+    console.log(response);
+}
 
   return (
     <div className="expanded-div">
@@ -67,7 +78,7 @@ const ExpandedCard = ({ data, setExpanded }) => {
                 </li>
               ))}
             </ol>
-            <FavoriteIcon className="fav-icon"/>
+            <FavoriteIcon className="fav-icon" onClick={() => handleFavorite(data)}/>
 
           </CardContent>
         </CardOverflow>

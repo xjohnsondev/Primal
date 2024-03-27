@@ -38,7 +38,7 @@ router.get("/:exercise", async function(req, res, next){
 
 /** GET / { target }  => { exercises }
  *
- * Returns all exercises for a target
+ * Returns all exercises for a  chosen target
  **/
 router.get("/target/:target", async function(req, res, next){
     try{
@@ -73,6 +73,15 @@ router.post("/refresh", async function(req, res, next){
     try{
         const updatedExercises = await Exercise.refreshData();
         return res.status(201).json({ exercises: updatedExercises });
+    } catch(e){
+        return next(e);
+    }
+})
+
+router.post("/favorite", async function(req, res, next){
+    try{
+        const favExercise = await Exercise.handleFavorite(req.body.userId, req.body.exerciseId);
+        res.json({ message: "Exercise favorites handled successfully"});
     } catch(e){
         return next(e);
     }

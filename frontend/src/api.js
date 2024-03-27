@@ -66,6 +66,13 @@ class PrimalApi {
     let res = await this.request(`exercises/refresh`);
     return res;
   }
+
+  /** Adds exercise to favorites table */
+  static async handleFavorite(userId, exerciseId) {
+    let res = await this.request(`exercises/favorite`, { userId, exerciseId }, "post");
+    return res;
+  }
+
 }
 
 export default PrimalApi;
