@@ -78,10 +78,27 @@ router.post("/refresh", async function(req, res, next){
     }
 })
 
+/** POST / { user, exercise }
+ *
+ * Pairs userId and exerciseId and adds to user_favorites table to track exercises favorited
+ *
+ **/
 router.post("/favorite", async function(req, res, next){
     try{
         const favExercise = await Exercise.handleFavorite(req.body.userId, req.body.exerciseId);
-        res.json({ message: "Exercise favorites handled successfully"});
+        res.json({ 
+            message: "Exercise favorites handled successfully",
+            favExercise
+    });
+    } catch(e){
+        return next(e);
+    }
+})
+
+router.post("/user-favorite", async function(req, res, next){
+    try{
+        const userFavorites = await Exercise.getUserFavorites(req.body.userId);
+        res.json({ userFavorites });
     } catch(e){
         return next(e);
     }

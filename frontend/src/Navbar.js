@@ -21,7 +21,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="nav-favorites">
-            <Link href="/" className="link">
+            <Link href={`/user/${user.currentUser.id}/favorites`} className="link">
               <p>Favorites</p>
             </Link>
           </div>

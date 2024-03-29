@@ -10,7 +10,8 @@ class Exercise {
    **/
   static async get(id) {
     const result = await db.query(
-      `SELECT name,
+      `SELECT id,
+                  name,
                   target,
                   secondary,
                   gif,
@@ -103,10 +104,8 @@ class Exercise {
 
       const exercises = response.data;
 
-      // Log the received data from the external API
       console.log("Received data:", exercises);
 
-      // Truncate the exercises table
       await db.query("DELETE FROM exercises");
 
       // Insert exercises into the table
@@ -134,47 +133,49 @@ class Exercise {
    *
    * Returns { username, favorites[] }
    *
-   * Throws NotFoundError if user not found.
+   * Throws NotFoundError if user/ exercise not found.
    **/
   static async handleFavorite(userId, exerciseId) {
     // Check if user exists
     const userRes = await db.query(
-      `SELECT id,
-              username
-         FROM users
-         WHERE id = $1`,
+      `SELECT id
+       FROM users
+       WHERE id = $1`,
       [userId]
     );
     const user = userRes.rows[0];
 
-    if (!user) throw new NotFoundError(`No user with id: ${userId}`);
+    if (!user) {
+      throw new NotFoundError(`No user with ID: ${userId}`);
+    }
 
     // Check if exercise exists
     const exerciseRes = await db.query(
       `SELECT id
-         FROM exercises
-         WHERE id = $1`,
+       FROM exercises
+       WHERE id = $1`,
       [exerciseId]
     );
     const exercise = exerciseRes.rows[0];
 
-    if (!exercise)
+    if (!exercise) {
       throw new NotFoundError(`No exercise with ID: ${exerciseId}`);
+    }
 
-    // Check if the exercise is already in the favorites
+    // Check if user/exercise match is already in the favorites
     const favoriteRes = await db.query(
       `SELECT user_id
-   FROM user_favorites
-   WHERE user_id = $1 AND exercise_id = $2`,
+       FROM user_favorites
+       WHERE user_id = $1 AND exercise_id = $2`,
       [userId, exerciseId]
     );
-    const isFavorite = favoriteRes.rows.length > 0;
+    const isFavorite = favoriteRes.rows.length;
 
     if (isFavorite) {
       // Remove exercise from favorites
       await db.query(
         `DELETE FROM user_favorites
-     WHERE user_id = $1 AND exercise_id = $2`,
+         WHERE user_id = $1 AND exercise_id = $2`,
         [userId, exerciseId]
       );
     } else {
@@ -185,9 +186,28 @@ class Exercise {
         [userId, exerciseId]
       );
     }
+
+    // Return the updated exercise
     return await this.get(exerciseId);
   }
-  
+
+  /** Fetches all exercises a user has currently favored.
+   *
+   * Returns { userFavorites[] }
+   *
+   * Throws BadRequestError if user not found.
+   **/
+  static async getUserFavorites(userId) {
+    const result = await db.query(
+      `SELECT exercise_id 
+      FROM user_favorites 
+      WHERE user_id = $1`,
+      [userId]
+    );
+    if (!result.rows)
+      throw new BadRequestError("Can't retrieve favorited exercises");
+    return result.rows;
+  }
 }
 
 module.exports = Exercise;

@@ -43,6 +43,12 @@ class PrimalApi {
     return res.token;
   }
 
+  /** Get data for specific exercise */
+  static async getExercise(id){
+    let res = await this.request(`exercises/${id}`);
+    return res.exercise;
+  }
+
   /** Get all exercises. */
   static async getAll(){
     let res = await this.request(`exercises/all`);
@@ -73,6 +79,11 @@ class PrimalApi {
     return res;
   }
 
+  /** Fetches all exercises user has favorited */
+  static async getUserFavorites(userId){
+  let res = await this.request(`exercises/user-favorite`, {userId} , "post");
+  return res.userFavorites;
+  }
 }
 
 export default PrimalApi;

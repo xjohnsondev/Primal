@@ -12,14 +12,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import UserContext from "./UserContext";
 import "./ExpandedCard.css";
 
-const ExpandedCard = ({
+const ExpandedFav = ({
   data,
   setExpanded,
   userFavorites,
   setUserFavorites,
 }) => {
   const user = useContext(UserContext);
-
+    console.log(userFavorites);
   function closeCard() {
     setExpanded();
   }
@@ -30,7 +30,8 @@ const ExpandedCard = ({
       exercise.id
     );
     setUserFavorites(await PrimalApi.getUserFavorites(user.currentUser.id));
-    console.log(response.message);
+    console.log(response);
+    window.location.reload();
   }
 
   return (
@@ -75,7 +76,7 @@ const ExpandedCard = ({
                 ))}
             </ol>
             {userFavorites.some(
-              (favorite) => favorite.exercise_id === data.id
+              (favorite) => favorite.id === data.id
             ) ? (
               <FavoriteIconFill
                 className="fav-icon"
@@ -94,4 +95,4 @@ const ExpandedCard = ({
   );
 };
 
-export default ExpandedCard;
+export default ExpandedFav;
