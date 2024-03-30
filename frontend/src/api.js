@@ -69,7 +69,7 @@ class PrimalApi {
 
   /** Refresh app data (calls API) */
   static async refreshData(){
-    let res = await this.request(`exercises/refresh`);
+    let res = await this.request(`exercises/data/refresh`, {}, "post");
     return res;
   }
 

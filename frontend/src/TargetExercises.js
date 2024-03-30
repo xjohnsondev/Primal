@@ -70,7 +70,7 @@ const TargetExercises = () => {
           data={expanded}
           setExpanded={setExpanded}
           userFavorites={userFavorites}
-          setUserFavorites={setUserFavorites}
+          // setUserFavorites={setUserFavorites}
         />
       )}
     </>

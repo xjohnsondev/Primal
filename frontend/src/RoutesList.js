@@ -5,6 +5,8 @@ import Navbar from "./Navbar";
 import ExerciseCats from "./ExerciseCats";
 import TargetExercises from "./TargetExercises";
 import Favorites from "./Favorites";
+import NotFound from "./NotFound";
+import Refresh from "./Refresh";
 
 const RoutesList = ({login, signup, logout}) => {
     return (
@@ -16,7 +18,9 @@ const RoutesList = ({login, signup, logout}) => {
                 <Route exact path="/exercises" element={<ExerciseCats />} />
                 <Route exact path="/exercises/target/:target" element={<TargetExercises />} />
                 <Route exact path="/user/:userId/favorites" element={<Favorites />} />
-                {/* <Route exact path="/exercises/refresh" element={<Home refresh={refresh}/>} /> */}
+                <Route exact path="/exercises/data/refresh" element={<Refresh />} />
+                <Route path="*" element={<NotFound />} />
+
             </Routes>
         </BrowserRouter>
     );

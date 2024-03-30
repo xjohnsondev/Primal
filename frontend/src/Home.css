@@ -1,7 +1,63 @@
-.home-display{
-    margin-top: 30vh;
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-h1 {
-    color: #66FCF1 !important; 
+/* .home-display {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+} */
+
+.musclegirl {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: scaleX(-1);
+    height: 60vh; 
+    width: 60vh;
+}
+
+.muscleguy {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 75vh;
+    width: 75vh;
+}
+
+.title-div{
+    background-color: #66FCF1 !important;
+    height: 25vh;
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-div p {
+    font-family: 'Lexend Deca', sans-serif;
+    text-align: center;
+    font-size: min(21vh, 20vw);
+    color: #1F2833;
+}
+
+.title-para {
+    height: 25vh;
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title-para p{
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 110%;
+    color:#C5C6C7;
+    margin-top: 3%;
 }

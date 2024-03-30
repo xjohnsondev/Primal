@@ -9,7 +9,6 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
-import Favorite from "@mui/icons-material/Favorite";
 
 const Favorites = () => {
   const user = useContext(UserContext);
@@ -18,6 +17,7 @@ const Favorites = () => {
   const userFavoriteIds = useUserFavorites();
 
   useEffect(() => {
+    // Fetches exercises user has favorited
     async function fetchExerciseData() {
       if (user.currentUser && userFavoriteIds.length > 0) {
         const favoriteExercises = await Promise.all(
@@ -32,9 +32,9 @@ const Favorites = () => {
     fetchExerciseData();
   }, [user.currentUser, userFavoriteIds]);
 
+  // Selects card to be expanded
   function showcaseCard(data) {
     setExpanded(data);
-    console.log(data);
   }
 
   return (

@@ -1,6 +1,6 @@
 .nav {
     display: flex;
-    align-items: center; /* Align items vertically */
+    align-items: center;
     font-weight: 600;
 }
 
@@ -15,10 +15,14 @@
     text-decoration: none !important;
 }
 
-.nav-login p {
+.nav-login{
+    margin-left: auto;
+}
+
+.nav-login .link {
     color: #66FCF1;
     font-family: 'Lato', sans-serif;
-    margin-right: 20px;
+    margin-right: 20px !important;
 }
 
 .nav-link {
@@ -36,6 +40,4 @@
     margin-right: 30%;
 }
 
-/* Imported fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+

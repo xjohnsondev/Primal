@@ -3,7 +3,7 @@ import { useContext } from "react";
 import UserContext from "./UserContext";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ logout }) => {
   const user = useContext(UserContext);
 
   return (
@@ -26,13 +26,13 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="nav-logout">
-            <Link href="/logout" className="link">
+            <Link href="/" onClick={logout} className="link">
               <p>Logout</p>
             </Link>
           </div>
         </div>
       ) : (
-        <div className="nav-login">
+        <div className="nav-login" >
           <Link href="/login-signup" className="link">
             <p>Login/ Register</p>
           </Link>

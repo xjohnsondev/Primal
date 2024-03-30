@@ -199,7 +199,7 @@ class Exercise {
    **/
   static async getUserFavorites(userId) {
     const result = await db.query(
-      `SELECT exercise_id 
+      `SELECT exercise_id
       FROM user_favorites 
       WHERE user_id = $1`,
       [userId]
