@@ -20,7 +20,6 @@ const RoutesList = ({login, signup, logout}) => {
                 <Route exact path="/user/:userId/favorites" element={<Favorites />} />
                 <Route exact path="/exercises/data/refresh" element={<Refresh />} />
                 <Route path="*" element={<NotFound />} />
-
             </Routes>
         </BrowserRouter>
     );

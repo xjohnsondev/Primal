@@ -19,14 +19,13 @@ const TargetExercises = () => {
   const [expanded, setExpanded] = useState();
   const [userFavorites, setUserFavorites] = useState(useUserFavorites());
 
-  //   console.log(user);
 
   useEffect(() => {
+    // Get all exercises for target group
     async function getTargetExercises() {
       try {
         const response = await PrimalApi.getTargetExercises(target);
         setExercises(response.target);
-        console.log(response.target);
       } catch (e) {
         console.error("Error fetching data");
       }
@@ -34,6 +33,7 @@ const TargetExercises = () => {
     getTargetExercises();
   }, []);
 
+  // Displays selected exercise overlay
   function showcaseCard(data) {
     setExpanded(data);
   }
@@ -70,7 +70,7 @@ const TargetExercises = () => {
           data={expanded}
           setExpanded={setExpanded}
           userFavorites={userFavorites}
-          // setUserFavorites={setUserFavorites}
+          setUserFavorites={setUserFavorites}
         />
       )}
     </>

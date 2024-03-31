@@ -5,6 +5,7 @@ import PrimalApi from "./api";
 const Refresh = () => {
     const navigate = useNavigate();
 
+    // Refreshes data to bring app up to date with API refresh
     useEffect(()=> {
         async function refreshData(){
             await PrimalApi.refreshData();

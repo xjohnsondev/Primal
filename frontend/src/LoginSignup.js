@@ -17,13 +17,10 @@ const LoginSignup = ({ login, signup }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     // Handle form submission
-    console.log("Username:", formData.username);
-    console.log("Password:", formData.password);
-
     if (isLoginMode) {
       // Login logic
-      console.log("Login:", formData.username, formData.password);
       try {
         const response = await login({
           username: formData.username,
@@ -33,10 +30,10 @@ const LoginSignup = ({ login, signup }) => {
         if (response.success) navigate("/");
       } catch (error) {
         console.error("Login failed:", error);
+        
       }
     } else {
       // Register logic
-      console.log("Register:", formData);
       try {
         const response = await signup({
           username: formData.username,
@@ -52,7 +49,7 @@ const LoginSignup = ({ login, signup }) => {
     }
 
     // Clear the form after submission
-    // setFormData(INITIAL_STATE);
+    setFormData(INITIAL_STATE);
   };
 
   return (

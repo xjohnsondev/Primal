@@ -6,7 +6,6 @@ import "./Home.css";
 
 const Home = () => {
   const user = useContext(UserContext);
-  console.log(user);
   return (
     <div className="home-display">
       <img src="/muscleguy.png" alt="muscleguy" className="muscleguy" />

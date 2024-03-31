@@ -19,11 +19,12 @@ const ExpandedFav = ({
   setUserFavorites,
 }) => {
   const user = useContext(UserContext);
-    console.log(userFavorites);
+
   function closeCard() {
     setExpanded();
   }
 
+  // If unfavored, favor and vice-versa
   async function handleFavorite(exercise) {
     const response = await PrimalApi.handleFavorite(
       user.currentUser.id,
@@ -62,8 +63,17 @@ const ExpandedFav = ({
                 ))}
             </ol>
           </CardContent>
-
-          <CardContent>
+            <CardContent className="target-div">
+              <Typography className="expanded-text">Target Muscle:</Typography>
+              <ol className="list">
+                <li key={uuidv4()}>
+                  <Typography className="expanded-text">
+                    {data.target}
+                  </Typography>
+                </li>
+              </ol>
+            </CardContent>
+          <CardContent className="secondary-div">
             <Typography className="expanded-text">
               Secondary Muscles:
             </Typography>
@@ -75,9 +85,9 @@ const ExpandedFav = ({
                   </li>
                 ))}
             </ol>
-            {userFavorites.some(
-              (favorite) => favorite.id === data.id
-            ) ? (
+          </CardContent>
+          <CardContent className="icon">
+            {userFavorites.some((favorite) => favorite.id === data.id) ? (
               <FavoriteIconFill
                 className="fav-icon"
                 onClick={() => handleFavorite(data)}

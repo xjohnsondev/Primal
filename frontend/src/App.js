@@ -9,6 +9,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
 
+  // if authToken exists, signs in user using token
   useEffect(() => {
     async function getUser() {
       if (localStorage.getItem("authToken")) {
@@ -18,7 +19,6 @@ function App() {
           PrimalApi.token = token
           let currentUser = await PrimalApi.getCurrentUser(username.username);
           setCurrentUser(currentUser);
-          console.log("current user: ", currentUser);          
         } catch (e) {
           console.log(e);
           console.log("---");
@@ -66,16 +66,6 @@ function App() {
       return { success: false, errors };
     }
   }
-
-  /** Refreshes data (Mainly for gif url) */
-  // async function refresh(){
-  //   try{
-  //     let response = await PrimalApi.refreshData();
-  //     return {success: true, data: response};
-  //   } catch (e){
-  //     console.error("Error refreshing data", e);
-  //   }
-  // }
 
   return (
     <div className="App">

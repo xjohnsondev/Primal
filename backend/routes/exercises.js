@@ -36,7 +36,6 @@ router.get("/:exercise", async function (req, res, next) {
  **/
 router.get("/target/:target", async function (req, res, next) {
   try {
-    console.log(req.params.target);
     const target = await Exercise.getTargetExercises(req.params.target);
     return res.json({ target });
   } catch (e) {

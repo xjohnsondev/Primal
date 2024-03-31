@@ -1,5 +1,4 @@
 .expanded-div {
-    
     transform: translate(-50%, -50%);
     position: fixed;
     top: 50%;
@@ -9,14 +8,10 @@
 
 .ex-card {
     padding: 100px;
-    /* height: 75vh;
-    width: 75vw; */
     position: fixed;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* background-color: #0b0C10; */
-    /* border: 1px solid black;  */
     z-index: 2;
     border-radius: 8px;
 }
@@ -78,4 +73,19 @@ li {
 .fav-icon:hover {
     cursor: pointer;
     font-size: 75px !important;
+}
+
+.icon{
+    position: absolute;
+    top: -10%;
+    left: 85%;
+}
+
+.secondary-div{
+    margin-left: 50%;
+    margin-top: -16%;
+}
+
+.target-div{
+    margin-left: 5%;
 }

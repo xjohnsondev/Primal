@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TextField, Button, Typography, Paper } from "@mui/material";
+import { Typography, Paper } from "@mui/material";
 import Link from "@mui/joy/Link";
 import { v4 as uuidv4 } from "uuid";
 import PrimalApi from './api';
@@ -9,11 +9,11 @@ const ExerciseCats = () => {
     const [targets, setTargets] = useState([]);
 
     useEffect(() => {
+        // Gets all target muscle groups
         async function getTargets() {
             try {
                 const targets = await PrimalApi.getTargets();
                 setTargets(targets.targets);
-                console.log(targets.targets);
             } catch (error) {
                 console.error('Error fetching targets:', error);
             }

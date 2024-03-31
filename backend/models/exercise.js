@@ -104,7 +104,7 @@ class Exercise {
 
       const exercises = response.data;
 
-      console.log("Received data:", exercises);
+      // console.log("Received data:", exercises);
 
       await db.query("DELETE FROM exercises");
 
