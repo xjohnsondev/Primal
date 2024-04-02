@@ -36,6 +36,7 @@ const ExpandedFav = ({
   }
 
   return (
+    <div className="ex-card-background">
     <div className="expanded-div">
       <Card className="ex-card expand" variant="plain">
         <CloseIcon className="close-icon" onClick={closeCard} />
@@ -101,6 +102,7 @@ const ExpandedFav = ({
           </CardContent>
         </CardOverflow>
       </Card>
+    </div>
     </div>
   );
 };

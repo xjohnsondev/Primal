@@ -32,3 +32,8 @@
     color: #66FCF1 !important;
     font-weight: 600;
   }
+
+.tar-title{
+  text-transform: capitalize;
+  color: #66FCF1;
+}

@@ -31,39 +31,39 @@ const ExpandedCard = ({
       exercise.id
     );
     setUserFavorites(await PrimalApi.getUserFavorites(user.currentUser.id));
-    console.log(response.message);
   }
 
   return (
-    <div className="expanded-div">
-      <Card className="ex-card expand" variant="plain">
-        <CloseIcon className="close-icon" onClick={closeCard} />
-        <img src={data.gif} className="card-gif expand-gif" alt={data.name} />
+    <div className="ex-card-background">
+      <div className="expanded-div">
+        <Card className="ex-card expand" variant="plain">
+          <CloseIcon className="close-icon" onClick={closeCard} />
+          <img src={data.gif} className="card-gif expand-gif" alt={data.name} />
 
-        <CardOverflow variant="soft" sx={{ backgroundColor: "#1F2833" }}>
-          <Divider inset="context" />
-          <CardContent orientation="horizontal">
-            <Typography className="expanded-text ex-title">
-              {data.name}
-            </Typography>
-          </CardContent>
+          <CardOverflow variant="soft" sx={{ backgroundColor: "#1F2833" }}>
+            <Divider inset="context" />
+            <CardContent orientation="horizontal">
+              <Typography className="expanded-text ex-title">
+                {data.name}
+              </Typography>
+            </CardContent>
 
-          <CardContent orientation="vertical">
-            <Typography className="expanded-text">Instructions:</Typography>
+            <CardContent orientation="vertical">
+              <Typography className="expanded-text">Instructions:</Typography>
 
-            <ol className="list">
-              {data.instructions &&
-                data.instructions.map((instruction) => (
-                  <li key={uuidv4()}>
-                    <Typography className="expanded-text">
-                      {instruction}
-                    </Typography>
-                  </li>
-                ))}
-            </ol>
-          </CardContent>
+              <ol className="list">
+                {data.instructions &&
+                  data.instructions.map((instruction) => (
+                    <li key={uuidv4()}>
+                      <Typography className="expanded-text">
+                        {instruction}
+                      </Typography>
+                    </li>
+                  ))}
+              </ol>
+            </CardContent>
 
-          <CardContent className="target-div">
+            <CardContent className="target-div">
               <Typography className="expanded-text">Target Muscle:</Typography>
               <ol className="list">
                 <li key={uuidv4()}>
@@ -73,34 +73,37 @@ const ExpandedCard = ({
                 </li>
               </ol>
             </CardContent>
-          <CardContent className="secondary-div">
-            <Typography className="expanded-text">
-              Secondary Muscles:
-            </Typography>
-            <ol className="list">
-              {data.secondary &&
-                data.secondary.map((sec) => (
-                  <li key={uuidv4()}>
-                    <Typography className="expanded-text">{sec}</Typography>
-                  </li>
-                ))}
-            </ol>
-          </CardContent>
-          <CardContent className="icon">
-            {userFavorites.some((favorite) => favorite.exercise_id === data.id) ? (
-              <FavoriteIconFill
-                className="fav-icon"
-                onClick={() => handleFavorite(data)}
-              />
-            ) : (
-              <FavoriteIcon
-                className="fav-icon"
-                onClick={() => handleFavorite(data)}
-              />
-            )}
-          </CardContent>
-        </CardOverflow>
-      </Card>
+            <CardContent className="secondary-div">
+              <Typography className="expanded-text">
+                Secondary Muscles:
+              </Typography>
+              <ol className="list">
+                {data.secondary &&
+                  data.secondary.map((sec) => (
+                    <li key={uuidv4()}>
+                      <Typography className="expanded-text">{sec}</Typography>
+                    </li>
+                  ))}
+              </ol>
+            </CardContent>
+            <CardContent className="icon">
+              {userFavorites.some(
+                (favorite) => favorite.exercise_id === data.id
+              ) ? (
+                <FavoriteIconFill
+                  className="fav-icon"
+                  onClick={() => handleFavorite(data)}
+                />
+              ) : (
+                <FavoriteIcon
+                  className="fav-icon"
+                  onClick={() => handleFavorite(data)}
+                />
+              )}
+            </CardContent>
+          </CardOverflow>
+        </Card>
+      </div>
     </div>
   );
 };

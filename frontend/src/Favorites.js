@@ -9,6 +9,7 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
+import "./Favorites.css";
 
 const Favorites = () => {
   const user = useContext(UserContext);
@@ -39,7 +40,7 @@ const Favorites = () => {
 
   return (
     <>
-      <h1 style={{ textTransform: "capitalize" }}>Favorites</h1>
+      <h1 className="fav-title">Favorites</h1>
       <div className="tar-list">
         {userFavorites.length > 0 &&
           userFavorites.map((exercise) => (

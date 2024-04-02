@@ -40,7 +40,7 @@ const TargetExercises = () => {
 
   return (
     <>
-      <h1 style={{ textTransform: "capitalize" }}>{target}</h1>
+      <h1 className="tar-title">{target}</h1>
       <div className="tar-list">
         {exercises.map((exercise) => (
           <div key={uuidv4()}>

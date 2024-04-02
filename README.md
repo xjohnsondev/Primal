@@ -10,4 +10,4 @@ PRIMAL is a fitness application that allows users to view workouts to add to the
 
 db.json file added for quick data reference
 
-If images aren't appearing, run endpoint "/exercises/refresh" to call the api for updated image URLs. (Will also erase user favorites)
+If images aren't appearing, run endpoint "/exercises/data/refresh" to call the api for updated image URLs. (Will also erase user favorites)
