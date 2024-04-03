@@ -193,21 +193,34 @@ class Exercise {
 
   /** Fetches all exercises a user has currently favored.
    *
-   * Returns { userFavorites[] }
+   * Returns { userFavorites[{..}, {..}, ...] }
    *
    * Throws BadRequestError if user not found.
    **/
   static async getUserFavorites(userId) {
-    const result = await db.query(
-      `SELECT exercise_id
-      FROM user_favorites 
-      WHERE user_id = $1`,
-      [userId]
+    const exerciseIds = await db.query(
+        `SELECT exercise_id
+         FROM user_favorites 
+         WHERE user_id = $1`,
+        [userId]
     );
-    if (!result.rows)
-      throw new BadRequestError("Can't retrieve favorited exercises");
-    return result.rows;
-  }
-}
 
+    if (!exerciseIds.rows.length)
+        throw new BadRequestError("Can't retrieve favorited exercises");
+
+    const exercises = await Promise.all(
+        exerciseIds.rows.map(async (exerciseId) => {
+            const result = await db.query(
+                `SELECT *
+                 FROM exercises
+                 WHERE id = $1`,
+                [exerciseId.exercise_id]
+            );
+            return result.rows;
+        })
+    );
+
+    return exercises.flat();
+}
+}
 module.exports = Exercise;

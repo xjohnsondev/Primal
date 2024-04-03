@@ -17,8 +17,14 @@ const TargetExercises = () => {
   const user = useContext(UserContext);
   const [exercises, setExercises] = useState([]);
   const [expanded, setExpanded] = useState();
-  const [userFavorites, setUserFavorites] = useState(useUserFavorites());
+  const [userFavorites, setUserFavorites] = useState([]);
 
+  // Custom hook to fetch user favorites
+  let fetchedUserFavorites = useUserFavorites();
+
+  useEffect(() => {
+    setUserFavorites(fetchedUserFavorites);
+  }, [fetchedUserFavorites]);
 
   useEffect(() => {
     // Get all exercises for target group
@@ -40,6 +46,8 @@ const TargetExercises = () => {
 
   return (
     <>
+        {    console.log(userFavorites)}
+
       <h1 className="tar-title">{target}</h1>
       <div className="tar-list">
         {exercises.map((exercise) => (

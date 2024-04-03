@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import useUserFavorites from "./hooks/useUserFavorites";
 import UserContext from "./UserContext";
-import ExpandedFav from "./ExpandedFav";
-import PrimalApi from "./api";
+import ExpandedCard from "./ExpandedCard";
 import { v4 as uuidv4 } from "uuid";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
@@ -15,23 +14,13 @@ const Favorites = () => {
   const user = useContext(UserContext);
   const [expanded, setExpanded] = useState();
   const [userFavorites, setUserFavorites] = useState([]);
-  const userFavoriteIds = useUserFavorites();
+
+  // Custom hook to fetch user favorites
+  let fetchedUserFavorites = useUserFavorites();
 
   useEffect(() => {
-    // Fetches exercises user has favorited
-    async function fetchExerciseData() {
-      if (user.currentUser && userFavoriteIds.length > 0) {
-        const favoriteExercises = await Promise.all(
-          userFavoriteIds.map(async (favorite) => {
-            const response = await PrimalApi.getExercise(favorite.exercise_id);
-            return response;
-          })
-        );
-        setUserFavorites(favoriteExercises);
-      }
-    }
-    fetchExerciseData();
-  }, [user.currentUser, userFavoriteIds]);
+    setUserFavorites(fetchedUserFavorites);
+  }, [fetchedUserFavorites]);
 
   // Selects card to be expanded
   function showcaseCard(data) {
@@ -40,6 +29,7 @@ const Favorites = () => {
 
   return (
     <>
+    {    console.log(userFavorites)}
       <h1 className="fav-title">Favorites</h1>
       <div className="tar-list">
         {userFavorites.length > 0 &&
@@ -71,7 +61,7 @@ const Favorites = () => {
           ))}
       </div>
       {expanded && (
-        <ExpandedFav
+        <ExpandedCard
           data={expanded}
           setExpanded={setExpanded}
           userFavorites={userFavorites}

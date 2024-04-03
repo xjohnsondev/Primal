@@ -35,6 +35,9 @@ const ExpandedCard = ({
 
   return (
     <div className="ex-card-background">
+      {console.log(userFavorites)}
+      {console.log(data)}
+
       <div className="expanded-div">
         <Card className="ex-card expand" variant="plain">
           <CloseIcon className="close-icon" onClick={closeCard} />
@@ -87,12 +90,13 @@ const ExpandedCard = ({
               </ol>
             </CardContent>
             <CardContent className="icon">
-              {userFavorites.some(
-                (favorite) => favorite.exercise_id === data.id
-              ) ? (
+              {userFavorites.some((favorite) => favorite.id === data.id) ? (
                 <FavoriteIconFill
                   className="fav-icon"
-                  onClick={() => handleFavorite(data)}
+                  onClick={() => {
+                    handleFavorite(data);
+                    window.location.reload();
+                  }}
                 />
               ) : (
                 <FavoriteIcon
