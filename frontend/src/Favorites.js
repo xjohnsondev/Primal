@@ -29,7 +29,6 @@ const Favorites = () => {
 
   return (
     <>
-    {    console.log(userFavorites)}
       <h1 className="fav-title">Favorites</h1>
       <div className="tar-list">
         {userFavorites.length > 0 &&

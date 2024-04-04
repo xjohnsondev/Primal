@@ -46,8 +46,6 @@ const TargetExercises = () => {
 
   return (
     <>
-        {    console.log(userFavorites)}
-
       <h1 className="tar-title">{target}</h1>
       <div className="tar-list">
         {exercises.map((exercise) => (
