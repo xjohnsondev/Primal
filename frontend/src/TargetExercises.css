@@ -1,8 +1,13 @@
+.tar-display{
+  overflow-y: auto !important;
+  max-height: 100vh;
+}
 
 .tar-list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  overflow-y: auto !important;
 }
 
 .ex-card {

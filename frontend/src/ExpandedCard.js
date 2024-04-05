@@ -35,8 +35,6 @@ const ExpandedCard = ({
 
   return (
     <div className="ex-card-background">
-      {console.log(userFavorites)}
-      {console.log(data)}
 
       <div className="expanded-div">
         <Card className="ex-card expand" variant="plain">

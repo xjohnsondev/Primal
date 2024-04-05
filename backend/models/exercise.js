@@ -206,7 +206,7 @@ class Exercise {
     );
 
     if (!exerciseIds.rows.length)
-        throw new BadRequestError("Can't retrieve favorited exercises");
+        throw new BadRequestError("No favorited exercises for user");
 
     const exercises = await Promise.all(
         exerciseIds.rows.map(async (exerciseId) => {
