@@ -53,13 +53,14 @@ const LoginSignup = ({ login, signup }) => {
   };
 
   return (
-    <div className="login-display">
+    <div className="login-display" data-testid="login-display">
       <Paper className="paper" elevation={3}>
         <Typography variant="h4" gutterBottom className="text">
           {isLoginMode ? "Login" : "Register"}
         </Typography>
         <form className="form" onSubmit={handleSubmit}>
           <TextField
+            data-testid="Username"            
             className="input-box"
             label="Username"
             variant="filled"
@@ -70,6 +71,7 @@ const LoginSignup = ({ login, signup }) => {
             }
           />
           <TextField
+            data-testid="Password"
             className="input-box"
             type="password"
             label="Password"
@@ -114,7 +116,7 @@ const LoginSignup = ({ login, signup }) => {
               />
             </>
           )}
-          <Button className="button" type="submit" variant="contained">
+          <Button data-testid="button" className="button" type="submit" variant="contained">
             {isLoginMode ? "Login" : "Register"}
           </Button>
           <Typography

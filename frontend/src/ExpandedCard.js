@@ -38,7 +38,7 @@ const ExpandedCard = ({
 
       <div className="expanded-div">
         <Card className="ex-card expand" variant="plain">
-          <CloseIcon className="close-icon" onClick={closeCard} />
+          <CloseIcon data-testid="close-icon" className="close-icon" onClick={closeCard} />
           <img src={data.gif} className="card-gif expand-gif" alt={data.name} />
 
           <CardOverflow variant="soft" sx={{ backgroundColor: "#1F2833" }}>
@@ -90,6 +90,7 @@ const ExpandedCard = ({
             <CardContent className="icon">
               {userFavorites.some((favorite) => favorite.id === data.id) ? (
                 <FavoriteIconFill
+                data-testid="fav-icon"
                   className="fav-icon"
                   onClick={() => {
                     handleFavorite(data);
@@ -98,6 +99,7 @@ const ExpandedCard = ({
                 />
               ) : (
                 <FavoriteIcon
+                data-testid="fav-icon"
                   className="fav-icon"
                   onClick={() => handleFavorite(data)}
                 />

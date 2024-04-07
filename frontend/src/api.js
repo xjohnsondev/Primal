@@ -58,7 +58,7 @@ class PrimalApi {
   /** Get all exercise targets */
   static async getTargets(){
     let res = await this.request(`exercises`);
-    return res
+    return res;
   }
 
   /** Get all exercises for a target */

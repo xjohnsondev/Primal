@@ -22,7 +22,7 @@ const ExerciseCats = () => {
     },[])
 
     return (
-        <div className="cat-list">
+        <div data-testid="exercise-cats" className="cat-list">
             {targets.map((target) => (
                 <div  key={uuidv4()}>
                     <Link href={`/exercises/target/${target.target}`} className='link'>

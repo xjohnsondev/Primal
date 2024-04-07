@@ -13,7 +13,7 @@ const Navbar = ({ logout }) => {
           <p>PRIMAL</p>
         </Link>
       </div>
-      {user.currentUser ? (
+      {user && user.currentUser ? (
         <div className="nav-link">
           <div className="nav-exercises">
             <Link href="/exercises" className="link">

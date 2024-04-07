@@ -47,8 +47,8 @@ const TargetExercises = () => {
   return (
     <>
     <h1 className="tar-title">{target}</h1>
-    <div className="tar-display">
-      <div className="tar-list">
+    <div data-testid="tar-display" className="tar-display">
+      <div data-testid="tar-list" className="tar-list">
         {exercises.map((exercise) => (
           <div key={uuidv4()}>
             <Card

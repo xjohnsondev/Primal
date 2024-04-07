@@ -8,7 +8,7 @@ const useUserFavorites = () => {
 
   useEffect(() => {
     async function fetchUserFavorites() {
-      if (user.currentUser) {
+      if (user && user.currentUser) {
         try {
           const response = await PrimalApi.getUserFavorites(user.currentUser.id);
           setUserFavorites(response);
@@ -17,8 +17,8 @@ const useUserFavorites = () => {
         }
       }
     }
-    fetchUserFavorites();
-  }, [user.currentUser]);
+    if (user) fetchUserFavorites();
+  }, [user]);
 
   return userFavorites;
 };
