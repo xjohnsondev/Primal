@@ -27,6 +27,7 @@
 
 .nav-link {
     display: flex;
+    margin-left: auto;
 }
 
 .nav-link p{
