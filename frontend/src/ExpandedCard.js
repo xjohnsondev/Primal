@@ -35,13 +35,20 @@ const ExpandedCard = ({
 
   return (
     <div className="ex-card-background">
-
       <div className="expanded-div">
         <Card className="ex-card expand" variant="plain">
-          <CloseIcon data-testid="close-icon" className="close-icon" onClick={closeCard} />
+          <CloseIcon
+            data-testid="close-icon"
+            className="close-icon"
+            onClick={closeCard}
+          />
           <img src={data.gif} className="card-gif expand-gif" alt={data.name} />
 
-          <CardOverflow variant="soft" sx={{ backgroundColor: "#1F2833" }}>
+          <CardOverflow
+            variant="soft"
+            className="overflow"
+            sx={{ backgroundColor: "#1F2833" }}
+          >
             <Divider inset="context" />
             <CardContent orientation="horizontal">
               <Typography className="expanded-text ex-title">
@@ -64,48 +71,53 @@ const ExpandedCard = ({
               </ol>
             </CardContent>
 
-            <CardContent className="target-div">
-              <Typography className="expanded-text">Target Muscle:</Typography>
-              <ol className="list">
-                <li key={uuidv4()}>
-                  <Typography className="expanded-text">
-                    {data.target}
-                  </Typography>
-                </li>
-              </ol>
-            </CardContent>
-            <CardContent className="secondary-div">
-              <Typography className="expanded-text">
-                Secondary Muscles:
-              </Typography>
-              <ol className="list">
-                {data.secondary &&
-                  data.secondary.map((sec) => (
-                    <li key={uuidv4()}>
-                      <Typography className="expanded-text">{sec}</Typography>
-                    </li>
-                  ))}
-              </ol>
-            </CardContent>
-            <CardContent className="icon">
-              {userFavorites.some((favorite) => favorite.id === data.id) ? (
-                <FavoriteIconFill
-                data-testid="fav-icon"
-                  className="fav-icon"
-                  onClick={() => {
-                    handleFavorite(data);
-                    window.location.reload();
-                  }}
-                />
-              ) : (
-                <FavoriteIcon
-                data-testid="fav-icon"
-                  className="fav-icon"
-                  onClick={() => handleFavorite(data)}
-                />
-              )}
+            <CardContent className="muscles-worked">
+              <CardContent className="target-div">
+                <Typography className="expanded-text">
+                  Target Muscle:
+                </Typography>
+                <ol className="list">
+                  <li key={uuidv4()}>
+                    <Typography className="expanded-text">
+                      {data.target}
+                    </Typography>
+                  </li>
+                </ol>
+              </CardContent>
+              <CardContent className="secondary-div">
+                <Typography className="expanded-text">
+                  Secondary Muscles:
+                </Typography>
+                <ol className="list">
+                  {data.secondary &&
+                    data.secondary.map((sec) => (
+                      <li key={uuidv4()}>
+                        <Typography className="expanded-text">{sec}</Typography>
+                      </li>
+                    ))}
+                </ol>
+              </CardContent>
             </CardContent>
           </CardOverflow>
+
+          <CardContent className="icon">
+            {userFavorites.some((favorite) => favorite.id === data.id) ? (
+              <FavoriteIconFill
+                data-testid="fav-icon"
+                className="fav-icon"
+                onClick={() => {
+                  handleFavorite(data);
+                  window.location.reload();
+                }}
+              />
+            ) : (
+              <FavoriteIcon
+                data-testid="fav-icon"
+                className="fav-icon"
+                onClick={() => handleFavorite(data)}
+              />
+            )}
+          </CardContent>
         </Card>
       </div>
     </div>

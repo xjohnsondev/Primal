@@ -8,6 +8,8 @@
   justify-content: center;
   flex-wrap: wrap;
   overflow-y: auto !important;
+  max-height: 100%;
+  padding-bottom: 200px;
 }
 
 .ex-card {

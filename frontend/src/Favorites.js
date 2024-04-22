@@ -30,7 +30,8 @@ const Favorites = () => {
   return (
     <>
       <h1 className="fav-title">Favorites</h1>
-      <div className="tar-list">
+      <div className="fav-display">
+      <div className="tar-list fav-list">
         {userFavorites.length > 0 &&
           userFavorites.map((exercise) => (
             <div key={uuidv4()}>
@@ -67,6 +68,7 @@ const Favorites = () => {
           setUserFavorites={setUserFavorites}
         />
       )}
+      </div>
     </>
   );
 };

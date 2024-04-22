@@ -1,101 +1,104 @@
-.ex-card-background{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0,0,0,.95);
-    z-index: 3;
+.ex-card-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 3;
 }
 
 .expanded-div {
-    transform: translate(-50%, -50%);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 3;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 90%;
+  left: 50%;
+  z-index: 3;
 }
 
 .ex-card {
-    padding: 100px;
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    border-radius: 8px;
+  padding: 100px;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 8px;
 }
- .expand-gif {
-    height: 65% !important;
-    width: 60% !important;
- }
+.expand-gif {
+  height: 65% !important;
+  width: 60% !important;
+}
 
 .expand {
- height: 40vh !important;
- width: 30vw !important;
+  height: 80vh !important;
+  width: 30vw !important;
+}
+
+.overflow {
+  overflow-y: auto;
 }
 
 .expanded-text {
-    text-transform: capitalize;
-    text-align: left;
-    max-width: 90%;
-    color: #66FCF1 !important;
-    font-weight: 600;
+  text-transform: capitalize;
+  text-align: left;
+  max-width: 90%;
+  color: #66fcf1 !important;
+  font-weight: 600;
 }
 
 .ex-title {
-    font-size: 200% !important;
-    text-decoration: underline;
+  font-size: 200% !important;
+  text-decoration: underline;
 }
 
-li::marker{
-    color: #66FCF1;
+li::marker {
+  color: #66fcf1;
 }
 
 .list {
-    margin-top: auto !important;
+  margin-top: auto !important;
 }
 
 li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
-.close-icon{
-    position: fixed;
-    left: 88%;
-    top: 4%;   
-    font-size: 35px !important;
+.close-icon {
+  position: fixed;
+  left: 83%;
+  top: 4%;
+  font-size: 35px !important;
 }
 
 .close-icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .fav-icon {
-    position: absolute;
-    left: 60%;
-    top: 80%;
-    font-size: 70px !important;
-    z-index: 4;
-    color: red;
+  position: absolute;
+  left: 60%;
+  top: 80%;
+  font-size: 3.5vw !important;
+  z-index: 4;
+  color: red;
 }
 
 .fav-icon:hover {
-    cursor: pointer;
-    font-size: 75px !important;
+  cursor: pointer;
+  font-size: 4vw !important;
 }
 
-.icon{
-    position: absolute;
-    top: -10%;
-    left: 85%;
+.icon {
+  position: absolute;
+  top: 40%;
+  left: 81%;
 }
 
-.secondary-div{
-    margin-left: 50%;
-    margin-top: -16%;
-}
+.muscles-worked{
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: flex-start;
 
-.target-div{
-    margin-left: 5%;
 }
