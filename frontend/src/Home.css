@@ -17,16 +17,16 @@ body {
     left: 0;
     bottom: 0;
     transform: scaleX(-1);
-    height: 60vh; 
-    width: 60vh;
+    height: 50vh; 
+    width: 25vw;
 }
 
 .muscleguy {
     position: absolute;
     right: 0;
     bottom: 0;
-    height: 75vh;
-    width: 75vh;
+    height: 65vh;
+    width: 32vw;
 }
 
 .title-div{
@@ -44,7 +44,7 @@ body {
 .title-div p {
     font-family: 'Lexend Deca', sans-serif;
     text-align: center;
-    font-size: min(21vh, 20vw);
+    font-size: 9vw;
     color: #1F2833;
 }
 
